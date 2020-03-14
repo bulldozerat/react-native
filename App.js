@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList } from 'react-native';
+import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('misho');
@@ -16,6 +16,10 @@ export default function App() {
     { name: 'Ivo', id: '10' }
   ]);
 
+  const pressHandler = id => {
+    setObjNames(objNames.filter(e => e.id != id));
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -26,13 +30,13 @@ export default function App() {
         <Button title='click me' onPress={() => setName('viko')} />
       </View>
       <View style={styles.container}>
-        <FlatList data={objNames} renderItem={({ item }) => <Text>{item.name}</Text>} />
+        <FlatList data={objNames} keyExtractor={item => item.id} renderItem={({ item }) => <Text>{item.name}</Text>} />
 
         <ScrollView>
           {objNames.map(obj => (
-            <Text key={obj.id} style={styles.name}>
-              {obj.name}
-            </Text>
+            <TouchableOpacity onPress={() => pressHandler(obj.id)} key={obj.id}>
+              <Text style={styles.name}>{obj.name}</Text>
+            </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
