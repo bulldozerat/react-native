@@ -1,5 +1,17 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button, TextInput, ScrollView, FlatList, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TextInput,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+  Alert,
+  TouchableWithoutFeedback,
+  Keyboard
+} from 'react-native';
 
 export default function App() {
   const [name, setName] = useState('misho');
@@ -18,18 +30,19 @@ export default function App() {
 
   const pressHandler = id => {
     setObjNames(objNames.filter(e => e.id != id));
+    Alert.alert('Header title', 'Content Message', [
+      { text: 'button-text', onPress: () => console.log('When btn clicked') }
+    ]);
   };
 
   return (
-    <>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
       <View style={styles.container}>
         <Text>Open up App.js to start working on your app! 23</Text>
         <Text>My name iss {name}</Text>
         <TextInput placeholder='Enter yout name' style={styles.input} onChangeText={e => setName(e)} />
 
         <Button title='click me' onPress={() => setName('viko')} />
-      </View>
-      <View style={styles.container}>
         <FlatList data={objNames} keyExtractor={item => item.id} renderItem={({ item }) => <Text>{item.name}</Text>} />
 
         <ScrollView>
@@ -40,7 +53,7 @@ export default function App() {
           ))}
         </ScrollView>
       </View>
-    </>
+    </TouchableWithoutFeedback>
   );
 }
 
