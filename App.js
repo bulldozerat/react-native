@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { View } from 'react-native';
 
 //Other
 import * as Font from 'expo-font';
 import { AppLoading } from 'expo';
+import { globalStyles } from './styles/global';
 
 // Components
 import Home from './screens/Home';
@@ -22,7 +23,7 @@ export default function App() {
 
   if (fontsLoaded) {
     return (
-      <View style={styles.container}>
+      <View style={globalStyles.container}>
         <Home />
         <About />
         <ReviewDetails />
@@ -32,12 +33,3 @@ export default function App() {
 
   return <AppLoading startAsync={getFonts} onFinish={() => setFontsLoaded(true)} />;
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
