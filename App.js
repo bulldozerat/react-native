@@ -1,10 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+// Components
+import Home from './screens/Home';
+import About from './screens/About';
+import ReviewDetails from './screens/ReviewDetails';
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app! 123</Text>
+      <Home />
+      <About />
+      <ReviewDetails />
     </View>
   );
 }
